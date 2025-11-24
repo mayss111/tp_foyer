@@ -1,0 +1,64 @@
+package com.example.demo.controllers;
+
+
+import com.example.demo.Entitiy.Etudiant;
+import com.example.demo.service.EtudiantServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Tag(
+        name = "Gestion des Étudiants",
+        description = "Permet de créer, modifier, supprimer et consulter les étudiants du foyer."
+)
+@RestController
+@RequestMapping("/etudiants")
+public class EtudiantController{
+    private final EtudiantServiceImpl etudiantService;
+    public EtudiantController(EtudiantServiceImpl etudiantService) {
+        this.etudiantService = etudiantService;
+    }
+    @Operation(
+            summary = "Ajouter un étudiant",
+            description = "Crée un nouvel étudiant dans la base de données."
+    )
+    @PostMapping
+    public Etudiant addEtudiant(@RequestBody Etudiant etudiant) {
+        return etudiantService.addEtudiant(etudiant);
+    }
+    @Operation(
+            summary = "Modifier un étudiant",
+            description = "Met à jour les informations d’un étudiant existant."
+    )
+
+    @PutMapping
+    public Etudiant updateEtudiant(@PathVariable Long id,@RequestBody Etudiant etudiant) {
+        return etudiantService.updateEtudiant(id,etudiant);}
+    @Operation(
+            summary = "Supprimer un étudiant",
+            description = "Supprime un étudiant à partir de son identifiant."
+    )
+    @DeleteMapping("/{id}")
+    public void deleteEtudiant(@PathVariable Long id) {
+        etudiantService.deleteEtudiant(id);}
+
+    @Operation(
+            summary = "Lister tous les étudiants",
+            description = "Retourne la liste complète des étudiants enregistrés."
+    )
+
+    @GetMapping
+    public List<Etudiant> getAllEtudiants() {
+        return etudiantService.getAllEtudiants();
+    }
+    @Operation(
+            summary = "Récupérer un étudiant par ID",
+            description = "Retourne les informations d’un étudiant à partir de son identifiant."
+    )
+    @GetMapping("/{id}")
+    public Etudiant getEtudiant(@PathVariable Long id) {
+        return etudiantService.getEtudiantById(id);}
+    }
+
