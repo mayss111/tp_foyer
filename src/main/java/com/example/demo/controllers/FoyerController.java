@@ -1,8 +1,11 @@
-package tn.esprit.tp1.controller;
+package com.example.demo.controllers;
 
+import com.example.demo.Entitiy.Universite;
 import com.example.demo.service.FoyerServiceImpl;
+import com.example.demo.service.IFoyerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.Entitiy.Foyer;
 
@@ -11,63 +14,51 @@ import java.util.List;
         name = "Gestion des Foyers",
         description = "Endpoints pour la création, la mise à jour, la suppression et la consultation des foyers."
 )
+
 @RestController
-@RequestMapping("/foyers")
+@RequestMapping("/api/foyers")
 public class FoyerController {
+    @Autowired
+    private IFoyerService foyerService;
 
-    private final FoyerServiceImpl foyerService;
-
-    // ✅ Constructeur explicite
-    public FoyerController(FoyerServiceImpl foyerService) {
-        this.foyerService = foyerService;
+    @GetMapping
+    public List<Foyer> getAllFoyers() {
+        return foyerService.retrieveAllFoyers();
     }
 
-    // CREATE
-    @Operation(
-            summary = "Ajouter un foyer",
-            description = "Crée un nouveau foyer et l’enregistre dans la base de données."
-    )
+    @GetMapping("/{id}")
+    public Foyer getFoyerById(@PathVariable Long id) {
+        return foyerService.retrieveFoyer(id);
+    }
+
     @PostMapping
-    public Foyer addFoyer(@RequestBody Foyer foyer) {
+    public Foyer createFoyer(@RequestBody Foyer foyer) {
         return foyerService.addFoyer(foyer);
     }
 
-    // UPDATE
-    @Operation(
-            summary = "Mettre à jour un foyer",
-            description = "Modifie les informations d’un foyer existant à partir de son ID."
-    )
     @PutMapping("/{id}")
     public Foyer updateFoyer(@PathVariable Long id, @RequestBody Foyer foyer) {
-        return foyerService.updateFoyer(id, foyer);
+        foyer.setId(id);
+        return foyerService.updateFoyer(foyer);
     }
-    @Operation(
-            summary = "Supprimer un foyer",
-            description = "Supprime un foyer en utilisant son identifiant."
-    )
-    // DELETE
+
     @DeleteMapping("/{id}")
     public void deleteFoyer(@PathVariable Long id) {
-        foyerService.deleteFoyer(id);
+        foyerService.removeFoyer(id);
     }
 
-    // READ - ALL
-    @Operation(
-            summary = "Lister tous les foyers",
-            description = "Retourne la liste complète des foyers enregistrés."
-    )
-    @GetMapping
-    public List<Foyer> getAllFoyers() {
-        return foyerService.getAllFoyers();
+    @PutMapping("/{idFoyer}/affecter-universite")
+    public Universite affecterFoyerAUniversite(@PathVariable Long idFoyer, @RequestParam String nomUniversite) {
+        return foyerService.affecterFoyerAUniversite(idFoyer, nomUniversite);
     }
 
-    // READ - ONE
-    @Operation(
-            summary = "Récupérer un foyer par ID",
-            description = "Retourne les détails d’un foyer spécifique à partir de son identifiant."
-    )
-    @GetMapping("/{id}")
-    public Foyer getFoyerById(@PathVariable Long id) {
-        return foyerService.getFoyerById(id);
+    @PutMapping("/desaffecter-universite/{idUniversite}")
+    public Universite desaffecterFoyerAUniversite(@PathVariable Long idUniversite) {
+        return foyerService.desaffecterFoyerAUniversite(idUniversite);
+    }
+
+    @PostMapping("/ajouter-et-affecter/{idUniversite}")
+    public Foyer ajouterFoyerEtAffecterAUniversite(@RequestBody Foyer foyer, @PathVariable Long idUniversite) {
+        return foyerService.ajouterFoyerEtAffecterAUniversite(foyer, idUniversite);
     }
 }

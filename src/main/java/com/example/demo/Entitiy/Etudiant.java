@@ -18,6 +18,14 @@ public class Etudiant {
 
         @ManyToMany(mappedBy = "etudiants")
         private List<Reservation> reservations;
+
+    public Set<Reservation> getReservations() {
+        return (Set<Reservation>) reservations;
     }
+
+    public void setReservations(Set<Reservation> reservations) {
+    }
+}
+
 
 

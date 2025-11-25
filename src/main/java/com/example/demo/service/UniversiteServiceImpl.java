@@ -20,15 +20,20 @@ public class UniversiteServiceImpl implements IUniversiteService {
     }
 
     @Override
+    public Universite updateUniversite(Universite universite) {
+        return null;
+    }
+
+    @Override
     public Universite updateUniversite(Long id, Universite universite) {
         Universite existingUniversite = universiteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Université introuvable avec ID : " + id));
 
-        if (universite.getNomUniversite() != null)
-            existingUniversite.setNomUniversite(universite.getNomUniversite());
+// ✅ CORRECTION :
+        existingUniversite.setNomUniversite(universite.getNomUniversite()); // Gardez cette ligne
+        existingUniversite.setAdresse(universite.getAdresse());             // Gardez cette ligne
 
-        if (universite.getAdresse() != null)
-            existingUniversite.setAdresse(universite.getAdresse());
+// ⚠️ LE VRAI PROBLÈME : Vérifiez votre entité Universite !
 
         return universiteRepository.save(existingUniversite);
     }
@@ -39,6 +44,16 @@ public class UniversiteServiceImpl implements IUniversiteService {
             throw new RuntimeException("Université introuvable avec ID : " + id);
         }
         universiteRepository.deleteById(id);
+    }
+
+    @Override
+    public Universite getUniversite(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Universite> getUniversites() {
+        return List.of();
     }
 
     @Override

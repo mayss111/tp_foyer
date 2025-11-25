@@ -1,44 +1,47 @@
 package com.example.demo.controllers;
 
 import com.example.demo.Entitiy.Reservation;
-import com.example.demo.repository.ReservationRepository;
-import com.example.demo.service.ReservationServiceImpl;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.example.demo.service.IReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 @RestController
-@RequestMapping("/reservations")
-@Tag(name = "Reservation Management", description = "CRUD operations for reservations")
-
+@RequestMapping("/api/reservations")
 public class ReservationController {
-    private final ReservationServiceImpl reservationService ;
-    public ReservationController(ReservationServiceImpl reservationService) {
-        this.reservationService = reservationService;
+
+    @Autowired
+    private IReservationService reservationService;
+
+    @GetMapping
+    public List<Reservation> getAllReservations() {
+        return reservationService.retrieveAllReservation();
     }
-    @Operation(summary = "Add a new reservation", description = "Creates a new reservation in the system")
-@PostMapping
-public String addReservation(@RequestBody Reservation reservation) {
-    return reservationService.addReservation(reservationService );}
-    @Operation(summary = "Update an existing reservation", description = "Updates the details of a reservation")
-@PutMapping
-public String updateReservation(@RequestBody Reservation reservation) {
-    return reservationService.updateReservation(reservationService);}
-    @Operation(summary = "Delete a reservation by ID", description = "Deletes the reservation with the given ID")
-@DeleteMapping("/{id}")
-public void deleteReservation(@PathVariable long id) {
-    return reservationService.updateReservation(reservationService);}
+    @GetMapping("/{id}")
+    public Reservation getReservationById(@PathVariable String id) {
+        return reservationService.retrieveReservation(id);
+    }
 
-    @Operation(summary = "Get all reservations", description = "Returns the list of all reservations")
-@GetMapping
-public List<Reservation> getAllReservations(){
-    return reservationService.getAllReservation();
-}
+    @PutMapping("/{id}")
+    public Reservation updateReservation(@PathVariable String id, @RequestBody Reservation reservation) {
+        reservation.setIdReservation(id);
+        return reservationService.updateReservation(reservation);
+    }
 
-    @Operation(summary = "Get a reservation by ID", description = "Returns a specific reservation by its ID")
-@GetMapping
-public Reservation getAllReservationById(@PathVariable Long id){
-    return reservationService.getReservationById(id);
-}
+    @PostMapping("/ajouter/{idChambre}/{cinEtudiant}")
+    public Reservation ajouterReservation(@PathVariable Long idChambre, @PathVariable Long cinEtudiant) {
+        return reservationService.ajouterReservation(idChambre, cinEtudiant);
+    }
+
+    @PutMapping("/annuler/{cinEtudiant}")
+    public Reservation annulerReservation(@PathVariable Long cinEtudiant) {
+        return reservationService.annulerReservation(cinEtudiant);
+    }
+
+    @GetMapping("/recherche")
+    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(@RequestParam String anneeUniversitaire, @RequestParam String nomUniversite) {
+        return reservationService.getReservationParAnneeUniversitaireEtNomUniversite(anneeUniversitaire , nomUniversite);
+    }
 }

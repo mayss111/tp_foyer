@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class EtudiantServiceImpl implements IEtudiantService{
     @Autowired
-  EtudiantRepository etudiantRepository;
+  private EtudiantRepository etudiantRepository;
 
     @Override
 
@@ -23,7 +23,7 @@ public class EtudiantServiceImpl implements IEtudiantService{
     public Etudiant updateEtudiant(Long id, Etudiant etudiant) {
         Optional<Etudiant> existingEtudiant = etudiantRepository.findById(id);
 
-        return etudiantRepository.save();
+        return etudiantRepository.save(etudiant);
     }
 
     @Override

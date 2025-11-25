@@ -4,4 +4,5 @@ import com.example.demo.Entitiy.Universite;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UniversiteRepository extends JpaRepository<Universite, Long> {
+    Universite findByNomUniversite(String nomUniversite);
 }

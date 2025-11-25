@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 import com.example.demo.Entitiy.Chambre;
+import com.example.demo.Entitiy.Typechambre;
 import com.example.demo.service.IChambreService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,44 +12,49 @@ import lombok.*;
 
 import java.util.List;
 @RequiredArgsConstructor
-@RestController
 @Tag(
         name="gestion chambre",
         description="CRUD complet pour la gestion des chambres et leur lien avec les blocs")
-@RequestMapping("/chambre")
+@RestController
+@RequestMapping("/api/chambres")
 public class ChambreController {
 
-    private final IChambreService chambreService;
-    public ChambreController(IChambreService chambreService) {
-        this.chambreService = chambreService;
+    @Autowired
+    private IChambreService chambreService;
+
+    @GetMapping
+    public List<Chambre> getAllChambres() {
+        return chambreService.retrieveAllChambres();
     }
 
-    @Operation(summary ="Ajouter une chambre",description = "Creer une nouvellle chamvbre dans  la base de données")
+    @GetMapping("/{id}")
+    public Chambre getChambreById(@PathVariable Long id) {
+        return chambreService.retrieveChambre(id);
+    }
+
     @PostMapping
-    public Chambre addChambre(@RequestBody Chambre chambre) {
+    public Chambre createChambre(@RequestBody Chambre chambre) {
         return chambreService.addChambre(chambre);
     }
-    @Operation(summary = " Modifier une chambre",description="Met a jour les informations d une existante")
-    @PutMapping()
-    public Chambre updateChambre(@RequestBody Chambre chambre) {
+
+    @PutMapping("/{id}")
+    public Chambre updateChambre(@PathVariable Long id, @RequestBody Chambre chambre) {
+        chambre.setIdChambre(id);
         return chambreService.updateChambre(chambre);
     }
-    @Operation(summary = "Supprimer une chambre",description = "Supprime une chambre a partir de son id ")
-    @DeleteMapping("/{id}")
-    public void deleteChambre(@PathVariable long idchambre
-    ) {
-        chambreService.deleteChambre(idchambre);
-    }
-    @Operation(summary = "Lister toutes les chambres ",description = "Retourne la lise complete des chambres ")
-    @GetMapping
-    public List<Chambre> getAllChambre() {
-        return chambreService.allChambres();
-    }
-    @Operation(summary = "Lister les chmbres d'un bloc", description="Retourne toutes les chambres appartenant a un bloc donné ")
-    @GetMapping("/bloc/{idBloc")
-    public List<Chambre> getChambresByBloc(@PathVariable long idBloc) {
-        return chambreService.findBlocById(idBloc);
 
+    @GetMapping("/universite/{nomUniversite}")
+    public List<Chambre> getChambresParNomUniversite(@PathVariable String nomUniversite) {
+        return chambreService.getChambresParNomUniversite(nomUniversite);
+    }
+
+    @GetMapping("/bloc/{idBloc}/type/{typeC}")
+    public List<Chambre> getChambresParBlocEtType(@PathVariable Long idBloc, @PathVariable Typechambre typeC) {
+        return chambreService.getChambresParBlocEtType(idBloc, typeC);
+    }
+
+    @GetMapping("/non-reservees/universite/{nomUniversite}/type/{type}")
+    public List<Chambre> getChambresNonReserveParNomUniversiteEtTypeChambre(@PathVariable String nomUniversite, @PathVariable Typechambre type) {
+        return chambreService.getChambresNonReserveParNomUniversiteEtTypeChambre(nomUniversite, type);
     }
 }
-
