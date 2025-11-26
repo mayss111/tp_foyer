@@ -11,16 +11,16 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+
 
 @ToString
 public class Etudiant {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long idEtudiant;
-        private String nomE;
-        private String prenomE;
-        private String cin;
+        private String nom;
+        private String prenom;
+        private Long cin;
         private String ecole;
         private LocalDate dateNaissance;
 

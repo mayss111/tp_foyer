@@ -20,7 +20,7 @@ public class Chambre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long idchambre;
-    long nombrehambre;
+    private Long nombrehambre;
     @Enumerated(EnumType.STRING)
     Typechambre typeC;
     @ManyToOne

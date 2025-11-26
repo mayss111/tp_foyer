@@ -33,7 +33,7 @@ public class EtudiantController{
             description = "Met à jour les informations d’un étudiant existant."
     )
 
-    @PutMapping
+    @PutMapping("/{id}")
     public Etudiant updateEtudiant(@PathVariable Long id,@RequestBody Etudiant etudiant) {
         return etudiantService.updateEtudiant(id,etudiant);}
     @Operation(

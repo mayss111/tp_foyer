@@ -18,7 +18,7 @@ import java.util.Set;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String numReservation;
+    private Long numReservation;
     String anneReservation;
     boolean estValid;
     @ManyToMany
