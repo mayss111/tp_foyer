@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.Entitiy.Chambre;
-import com.example.demo.Entitiy.Typechambre;
+import com.example.demo.Entity.Chambre;
+import com.example.demo.Entity.Typechambre;
 import com.example.demo.repository.ChambreRepository;
 import com.example.demo.repository.UniversiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

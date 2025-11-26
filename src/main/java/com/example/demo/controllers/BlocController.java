@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.Entitiy.Bloc;
+import com.example.demo.Entity.Bloc;
 import com.example.demo.service.IBlocService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

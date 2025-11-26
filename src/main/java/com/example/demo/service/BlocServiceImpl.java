@@ -1,10 +1,10 @@
 package com.example.demo.service;
-import com.example.demo.Entitiy.Chambre;
+import com.example.demo.Entity.Chambre;
 import com.example.demo.repository.ChambreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.Entitiy.Bloc;
+import com.example.demo.Entity.Bloc;
 import com.example.demo.repository.BlocRepository;
 
 import java.util.List;

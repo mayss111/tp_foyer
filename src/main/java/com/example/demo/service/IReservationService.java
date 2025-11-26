@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.Entitiy.Reservation;
+import com.example.demo.Entity.Reservation;
 
 import java.util.Date;
 import java.util.List;

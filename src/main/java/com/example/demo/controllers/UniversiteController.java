@@ -1,15 +1,13 @@
 package com.example.demo.controllers;
 import com.example.demo.service.UniversiteServiceImpl;
-import com.example.demo.Entitiy.Universite;
+import com.example.demo.Entity.Universite;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @Tag(

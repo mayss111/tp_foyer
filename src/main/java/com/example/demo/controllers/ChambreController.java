@@ -1,14 +1,12 @@
 package com.example.demo.controllers;
-import com.example.demo.Entitiy.Chambre;
-import com.example.demo.Entitiy.Typechambre;
+import com.example.demo.Entity.Chambre;
+import com.example.demo.Entity.Typechambre;
 import com.example.demo.service.IChambreService;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import lombok.*;
 
 import java.util.List;
 @RequiredArgsConstructor

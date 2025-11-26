@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.Entitiy.Chambre;
-import com.example.demo.Entitiy.Etudiant;
-import com.example.demo.Entitiy.Reservation;
+import com.example.demo.Entity.Chambre;
+import com.example.demo.Entity.Etudiant;
+import com.example.demo.Entity.Reservation;
 import com.example.demo.repository.ChambreRepository;
 import com.example.demo.repository.EtudiantRepository;
 import com.example.demo.repository.ReservationRepository;

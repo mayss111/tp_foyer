@@ -1,13 +1,10 @@
-package com.example.demo.Entitiy;
+package com.example.demo.Entity;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
-import javax.print.DocFlavor;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +22,7 @@ public class Chambre {
     private long idchambre;
     long nombrehambre;
     @Enumerated(EnumType.STRING)
-    Typechambre typechambre;
+    Typechambre typeC;
     @ManyToOne
     Bloc bloc;
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL)
@@ -39,7 +36,7 @@ public class Chambre {
     public String getNumeroChambre(long nombrechambre) {
         return null;
     }
-    public Typechambre getTypeC() { return typechambre; } // pas getTypechambre()
+    public Typechambre getTypeC() { return typeC; } // pas getTypechambre()
 
     public Bloc getBloc() {
         return this.bloc;

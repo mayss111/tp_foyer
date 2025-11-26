@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.Entitiy.Bloc;
+import com.example.demo.Entity.Bloc;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
-package com.example.demo.Entitiy;
+package com.example.demo.Entity;
 
-import org.antlr.v4.runtime.misc.Triple;
 public enum Typechambre {
     SIMPLE(1),
     DOUBLE(2),

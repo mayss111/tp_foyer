@@ -1,12 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.Entitiy.Reservation;
+import com.example.demo.Entity.Reservation;
 import com.example.demo.service.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 @RestController
 @RequestMapping("/api/reservations")

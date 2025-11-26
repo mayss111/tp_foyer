@@ -1,10 +1,9 @@
-package com.example.demo.Entitiy;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,4 +32,8 @@ public class Bloc {
         return this.nomBloc;
     }
     public void setBloc (Bloc bloc) {}
+
+    public Foyer getFoyer() {
+        return foyer;
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.Entitiy;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,8 +16,8 @@ import java.util.Set;
 
 @ToString
 public class Reservation {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String numReservation;
     String anneReservation;
     boolean estValid;

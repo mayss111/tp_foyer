@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.Entitiy.Etudiant;
+import com.example.demo.Entity.Etudiant;
 import com.example.demo.service.EtudiantServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

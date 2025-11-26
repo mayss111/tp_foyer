@@ -1,11 +1,19 @@
-package com.example.demo.Entitiy;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
+
+@ToString
 public class Etudiant {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
