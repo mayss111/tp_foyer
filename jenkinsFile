@@ -2,26 +2,35 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN = credentials('sonar_token') // Token SonarQube
+        SONAR_TOKEN = credentials('sonar_token') // Ton token SonarQube stocké dans Jenkins
     }
 
     stages {
         stage('Maven SonarQube Analysis') {
             steps {
-                dir('tp_foyer') { // dossier du projet
-                    withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
-                        withSonarQubeEnv('SonarQube') {
-                            sh '''
-                                mvn clean package -DskipTests
-                                mvn sonar:sonar \
-                                  -Dsonar.projectKey=demo1 \
-                                  -Dsonar.token=$SONAR_TOKEN \
-                                  -Dsonar.java.binaries=target/classes
-                            '''
-                        }
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        // Utilisation de l'option -Dsonar.token pour éviter l'avertissement de sécurité
+                        sh '''
+                            mvn clean package \
+                                -DskipTests \
+                                sonar:sonar \
+                                -Dsonar.projectKey=tp_foyer \
+                                -Dsonar.token=$SONAR_TOKEN \
+                                -Dsonar.java.binaries=target/classes
+                        '''
                     }
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Analyse SonarQube terminée avec succès !'
+        }
+        failure {
+            echo 'Échec de l\'analyse SonarQube. Vérifie les logs !'
         }
     }
 }
