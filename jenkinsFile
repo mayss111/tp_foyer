@@ -15,7 +15,7 @@ pipeline {
                             mvn clean package \
                                 -DskipTests \
                                 sonar:sonar \
-                                -Dsonar.projectKey=tp_foyer \
+                                -Dsonar.projectKey=demo1 \
                                 -Dsonar.token=$SONAR_TOKEN \
                                 -Dsonar.java.binaries=target/classes
                         '''
